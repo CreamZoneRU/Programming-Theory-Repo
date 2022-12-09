@@ -5,18 +5,19 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     [SerializeField] float playerSpeed = 5f;
-    [SerializeField] int playerHealth = 3;
+    public int playerHealth = 10;
+    public int playerStrength = 2;
+
     [SerializeField] float horizontalInput;
     [SerializeField] float verticalInput;
 
     private Rigidbody playerRb;
-    private Animal animalScript;
+    public static PlayerController Player;
 
     // Start is called before the first frame update
     void Start()
     {
         playerRb = GetComponent<Rigidbody>();
-        animalScript = GameObject.FindGameObjectWithTag("Animal").GetComponent<Animal>();
     }
 
     // Update is called once per frame
@@ -26,23 +27,14 @@ public class PlayerController : MonoBehaviour
         verticalInput = Input.GetAxis("Vertical");
 
         // Z-axis movement
-        playerRb.AddForce(horizontalInput * playerSpeed * Vector3.right);
+        playerRb.AddForce(horizontalInput * playerSpeed * Vector3.right, ForceMode.Force);
         // X-axis movement
-        playerRb.AddForce(playerSpeed * verticalInput * Vector3.forward);
-    }
+        playerRb.AddForce(playerSpeed * verticalInput * Vector3.forward, ForceMode.Force);
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.gameObject.CompareTag("Animal"))
+        if(playerHealth <= 0)
         {
-            animalScript.animalHealth -= 1;
-            if (animalScript.animalHealth <= 0)
-            {
-                Destroy(collision.gameObject);
-            }
-            playerHealth -= animalScript.animalStrength;
-
-            Debug.Log($"Player Health: {playerHealth}");
+            Destroy(gameObject);
+            Debug.Log("You Died!");
         }
     }
 }
