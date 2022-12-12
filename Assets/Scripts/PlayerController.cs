@@ -4,9 +4,21 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    [SerializeField] float playerSpeed = 5f;
+    private float playerSpeed = 5f;
     public int playerHealth = 10;
-    public int playerStrength = 2;
+    private int m_playerStrength = 2;
+    public int playerStrength
+    {
+        get { return m_playerStrength; }
+        set
+        {
+            if (m_playerStrength < 0f)
+                Debug.Log("The damage of a character cannot be less than zero!");
+            else
+                m_playerStrength = value;
+        }
+    }
+    public bool isBleeding = false;
 
     [SerializeField] float horizontalInput;
     [SerializeField] float verticalInput;

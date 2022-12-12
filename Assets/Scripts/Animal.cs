@@ -7,12 +7,13 @@ public class Animal : MonoBehaviour
     protected Rigidbody animalRb;
     protected PlayerController player;
 
-    [SerializeField] protected int animalHealth = 1;
-    [SerializeField] protected int animalStrength = 2;
-    [SerializeField] protected float animalSpeed = 2.5f;
-    [SerializeField] protected float distanceToThePlayer;
-    [SerializeField] protected bool isGrounded;
-    [SerializeField] protected bool isFriendly;
+    protected int animalHealth;
+    protected int animalStrength;
+    protected float animalSpeed;
+    protected float jumpForce;
+    protected float distanceToThePlayer;
+    protected bool isGrounded;
+    protected bool isFriendly;
 
     // Start is called before the first frame update
     void Start()
@@ -53,6 +54,12 @@ public class Animal : MonoBehaviour
             Vector3 lookDirection = (player.transform.position - transform.position).normalized;
             animalRb.AddForce(lookDirection * animalSpeed, ForceMode.Force);
         }
+    }
+
+    public virtual void Jump()
+    {
+        animalRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+        isGrounded = false;
     }
 
     protected virtual void OnCollisionEnter(Collision collision)
