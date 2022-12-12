@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE (parent class)
 public class Animal : MonoBehaviour
 {
     protected Rigidbody animalRb;
@@ -29,6 +30,7 @@ public class Animal : MonoBehaviour
         Move();
     }
 
+    // ABSTRACTION
     public virtual float CalculateDistance()
     {
         if(player != null)
@@ -41,12 +43,14 @@ public class Animal : MonoBehaviour
         return distanceToThePlayer;
     }
 
+    // ABSTRACTION
     public virtual void DealDamage()
     {
         player.playerHealth -= animalStrength;
         Debug.Log($"Player Health: {player.playerHealth}");
     }
 
+    // ABSTRACTION
     public virtual void Move()
     {
         if (player != null)
@@ -56,12 +60,14 @@ public class Animal : MonoBehaviour
         }
     }
 
+    // ABSTRACTION
     public virtual void Jump()
     {
         animalRb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
         isGrounded = false;
     }
 
+    // ABSTRACTION
     protected virtual void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player"))

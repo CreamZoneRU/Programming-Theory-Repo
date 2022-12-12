@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     private float playerSpeed = 5f;
     public int playerHealth = 10;
+
+    // ENCAPSULATION
     private int m_playerStrength = 2;
     public int playerStrength
     {
@@ -18,6 +20,7 @@ public class PlayerController : MonoBehaviour
                 m_playerStrength = value;
         }
     }
+
     public bool isBleeding = false;
 
     [SerializeField] float horizontalInput;

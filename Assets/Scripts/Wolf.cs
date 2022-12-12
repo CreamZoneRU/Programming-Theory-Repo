@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE (child class)
 public class Wolf : Animal
 {
     private float spawnRange = 5f;
@@ -31,12 +32,15 @@ public class Wolf : Animal
         if (minionsCount == 0)
             SpawnMinionWave(3);
     }
+
+    // ABSTRACTION
     private void SpawnMinionWave(int minionsToSpawn)
     {
         for (int i = 0; i < minionsToSpawn; i++)
             Instantiate(minionPrefab, GenerateSpawnPosition(), minionPrefab.transform.rotation);
     }
 
+    // ABSTRACTION
     private Vector3 GenerateSpawnPosition()
     {
         float spawnPosX = Random.Range(transform.position.x + -spawnRange, transform.position.x + spawnRange);
@@ -47,6 +51,7 @@ public class Wolf : Animal
         return randomPos;
     }
 
+    // POLYMORPHISM
     protected override void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") && player.isBleeding == false)
@@ -62,6 +67,7 @@ public class Wolf : Animal
         }
     }
 
+    // ABSTRACTION
     private IEnumerator Bleed()
     {
         player.isBleeding = true;

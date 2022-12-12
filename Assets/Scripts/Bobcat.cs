@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+// INHERITANCE (child class)
 public class Bobcat : Animal
 {
     // Start is called before the first frame update
@@ -24,6 +25,7 @@ public class Bobcat : Animal
         Move();   
     }
 
+    // POLYMORPHISM
     public override void Move()
     {
         if (player != null)
